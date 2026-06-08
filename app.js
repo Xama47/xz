@@ -1,41 +1,25 @@
 // Дожидаемся загрузки Telegram WebApp
-const tg = window.Telegram?.WebApp;
+const tg = window.Telegram.WebApp;
+tg.ready();
+tg.expand();
 
-if (tg) {
-    tg.ready();
-    tg.expand();
+const user = tg.initDataUnsafe?.user;
 
-    const user = tg.initDataUnsafe?.user;
+if (user) {
+    document.getElementById('user-name').innerText = user.username ? @${user.username} : user.first_name;
 
-    if (user) {
-        const displayName = user.username ? @${user.username} : user.first_name;
-        const nameEl = document.getElementById('user-name');
-        if (nameEl) nameEl.innerText = displayName;
+    // ВАЖНО: Вставь сюда URL своего хостинга (VPS), где работает бот
+    const SERVER_URL = "https://твой-хостинг.com"; 
 
-        // Запрос к бэкенду
-        fetch(/api/user-info?init_data=${encodeURIComponent(tg.initData)})
-            .then(response => response.json())
-            .then(data => {
-                if (data.balance !== undefined) {
-                    const balEl = document.getElementById('user-balance');
-                    if (balEl) balEl.innerText = ${parseFloat(data.balance).toFixed(2)}$;
-                }
-                if (data.avatar_url) {
-                    const avatarImg = document.getElementById('user-avatar');
-                    if (avatarImg) {
-                        avatarImg.src = data.avatar_url;
-                        avatarImg.style.display = "inline-block";
-                    }
-                }
-            })
-            .catch(err => console.error("Ошибка API:", err));
-    } else {
-        const nameEl = document.getElementById('user-name');
-        if (nameEl) nameEl.innerText = "Гость";
-    }
-} else {
-    console.warn("Telegram WebApp не обнаружен. Открыто не в Telegram?");
-    // Можно поставить заглушку для тестов в браузере:
-    const nameEl = document.getElementById('user-name');
-    if (nameEl) nameEl.innerText = "Тестовый Юзер";
+    fetch(${SERVER_URL}/api/user-info?init_data=${encodeURIComponent(tg.initData)})
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('user-balance').innerText = ${parseFloat(data.balance).toFixed(2)}$;
+            if (data.avatar_url) {
+                const img = document.getElementById('user-avatar');
+                img.src = data.avatar_url;
+                img.style.display = "inline-block";
+            }
+        })
+        .catch(e => console.error("Ошибка:", e));
 }
