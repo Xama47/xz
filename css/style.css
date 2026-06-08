@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+body {
+  color: white;
+  margin: 0;
+  min-height: 100vh;
+  background-color: #000000;/* Базовый черный цвет */
+  background-image: 
+    /* Пятно 1: яркое, внизу по центру */
+  radial-gradient(circle at 50% 25%, rgba(65, 105, 225) 1%, transparent 48%);
+  
+  background-repeat: no-repeat;
+
+}
+
+.header-bg {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  height: 7vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.prof_block, .balance_block {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.prof_block span, .balance_block span {
+  background: rgba(128, 128, 128, 0.9);
+  color: white;
+  padding: 2px 5px;
+  border-radius: 50px;
+}
+
+#user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #555;
+}
+
+.balance_block img {
+  border-radius: 50%;
+  background: #555;
+  width: 18px;
+  height: 18px;
+}
+
+
+.header_prof, .balance_badge {
+  font-family: "JetBrains Mono";
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 4px;
+}
+
+#name_block {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 30%, rgba(255, 0, 128, 0.6) 90%);
+  height: 30vh;
+  width: 92%;
+  border-radius: 20px;
+  position: relative;
+  top: 0;
+  left: 4%;
+}
+
+.name_for_block h1 {
+  text-align: center;
+  padding: 6px 0;
+}
+
+.info_pepe {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info_name {
+  padding: 0 0 0 10px;
+  font-weight: 800;
+  font-size: 20px
+}
+
+.info_pepe img {
+  padding: 0 10 0 0px;
+}
